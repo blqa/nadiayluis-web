@@ -1,16 +1,16 @@
-/* ---- 1. Variables y Reseteo Básico ---- */
+/* ---- 1. Variables y Reseteo Básico (MODO PASTEL) ---- */
 :root {
-    --bg-color: #121212; /* Un negro tipo Spotify/Discord */
-    --surface-color: #1e1e1e; /* Un gris oscuro para "encima" */
-    --text-color: #f0f0f0; /* Un blanco no tan chillón */
-    --accent-color: #00c6ff; /* Un azul eléctrico chido */
+    --bg-color: #fdfaf6;       /* Un blanco cremoso / hueso */
+    --surface-color: #ffffff;  /* Blanco puro (para tarjetas/header) */
+    --text-color: #4a4a4a;       /* Gris oscuro (en lugar de negro puro) */
+    --accent-color: #e8b4b8;     /* Un rosa pastel / durazno */
     --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Esto nos salva la vida en los layouts */
+    box-sizing: border-box; 
 }
 
 /* ---- 2. El Cuerpo (Body) ---- */
@@ -19,7 +19,6 @@ body {
     color: var(--text-color);
     font-family: var(--font-main);
     
-    /* El TRUCO para que el footer se quede abajo */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -29,13 +28,14 @@ body {
 header {
     background-color: var(--surface-color);
     padding: 1rem 2rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Una sombra mucho más suave */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 header nav ul {
-    list-style: none; /* Quita los puntos de la lista */
-    display: flex; /* Pone los links en horizontal */
-    gap: 1.5rem; /* Espacio entre links */
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
 }
 
 header nav a {
@@ -47,31 +47,31 @@ header nav a {
 }
 
 header nav a:hover {
-    color: var(--accent-color); /* El acento de color al pasar el mouse */
+    color: var(--accent-color); /* El acento pastel */
 }
 
 /* ---- 4. Contenido Principal (Main) ---- */
 main {
-    /* Esto hace que el contenido crezca y empuje el footer */
     flex-grow: 1; 
 
-    /* Centra el contenido en la página */
+    /* Centra el contenido */
     width: 100%;
-    max-width: 800px; /* Un ancho chido para leer */
-    margin: 2rem auto; /* Centrado horizontal y margen arriba/abajo */
-    padding: 0 1rem; /* Padding para que no se pegue en móviles */
+    max-width: 800px; 
+    margin: 2rem auto; 
+    padding: 0 1rem; 
 }
 
 main h1 {
     font-size: 3rem;
-    color: var(--accent-color);
+    color: var(--text-color); /* El título principal ahora es oscuro */
     margin-bottom: 1rem;
 }
 
 main h2 {
     font-size: 1.5rem;
+    color: var(--accent-color); /* El acento pastel en los subtítulos */
     margin-top: 2rem;
-    border-bottom: 2px solid var(--surface-color);
+    border-bottom: 2px solid #f0f0f0; /* Una línea divisoria suave */
     padding-bottom: 0.5rem;
 }
 
@@ -80,16 +80,14 @@ main p {
     line-height: 1.6;
 }
 
-/* ---- 5. El Contador (La estrella) ---- */
+/* ---- 5. El Contador (Estilo Pastel) ---- */
 #contador-relacion {
     font-size: 2.5rem;
     font-weight: bold;
-    color: var(--accent-color);
+    color: var(--accent-color); /* Color pastel */
     text-align: left;
     margin-top: 1rem;
-    
-    /* Efecto neón sutil */
-    text-shadow: 0 0 8px rgba(0, 198, 255, 0.3);
+    /* Quitamos el efecto neón, ya no aplica */
 }
 
 /* ---- 6. Footer ---- */
@@ -97,5 +95,6 @@ footer {
     background-color: var(--surface-color);
     text-align: center;
     padding: 1.5rem;
-    margin-top: 2rem; /* Lo empuja para que no se pegue al main */
+    margin-top: 2rem; 
+    border-top: 1px solid #f0f0f0; /* Línea suave para separar */
 }

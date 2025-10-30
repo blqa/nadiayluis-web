@@ -1,10 +1,12 @@
-/* ---- 1. Variables y Reseteo Básico (MODO PASTEL) ---- */
+/* ---- 1. Variables y Reseteo Básico (MODO PASTEL V4) ---- */
 :root {
     --bg-color: #fdfaf6;
     --surface-color: #ffffff;
     --text-color: #4a4a4a;
     --accent-color: #e8b4b8;
-    --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --text-cursive: #1a237e; /* El azul oscuro de tu diseño original */
+    --font-main: 'Roboto', sans-serif;
+    --font-fancy: 'Dancing Script', cursive;
 }
 
 * {
@@ -26,22 +28,22 @@ body {
 /* ---- 3. Header y Navegación (MOBILE-FIRST) ---- */
 header {
     background-color: var(--surface-color);
-    padding: 1rem 1.5rem; /* Un poco más de padding lateral para el cel */
+    padding: 1rem 1.5rem; 
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 header nav ul {
     list-style: none;
-    display: flex; /* En mobile, los dejamos en horizontal */
-    justify-content: center; /* Centramos los 3 links */
-    gap: 1.5rem; /* Espacio entre links */
+    display: flex; 
+    justify-content: center; 
+    gap: 1.5rem; 
 }
 
 header nav a {
     color: var(--text-color);
     text-decoration: none;
     font-weight: 600;
-    font-size: 1rem; /* Un tamaño cómodo para tap */
+    font-size: 1rem; 
     transition: color 0.2s ease;
 }
 
@@ -53,37 +55,59 @@ header nav a:hover {
 main {
     flex-grow: 1; 
     width: 100%;
-    /* Padding para que el texto no se pegue a los bordes del teléfono */
-    padding: 2rem 1.5rem; 
+    padding: 2rem 1.5rem;
+    
+    /* Centramos el contenido del contador */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Centramos todo el texto dentro de main */
 }
 
-main h1 {
-    font-size: 2.5rem; /* Más chico para el cel */
-    color: var(--text-color);
-    margin-bottom: 1rem;
-    line-height: 1.1; /* Evita que se separe mucho en 2 renglones */
+/* ---- 5. ESTILOS DE TU CONTADOR (ADAPTADOS A PASTEL) ---- */
+
+.heart-icon {
+    font-size: 3em;
+    color: var(--accent-color); /* Usamos el color pastel */
+    margin-bottom: 20px;
+    /* Animación de pulso sutil */
+    animation: pulse 1.5s infinite alternate;
+}
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
 }
 
-main h2 {
-    font-size: 1.3rem; /* Más chico para el cel */
-    color: var(--accent-color);
-    margin-top: 2rem;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 0.5rem;
+.message-top {
+    font-family: var(--font-fancy); /* Fuente 'Dancing Script' */
+    font-size: 2.2em;
+    color: var(--text-cursive); /* Usamos el azul oscuro */
+    margin-bottom: 25px;
+    line-height: 1.3;
 }
 
-main p {
-    font-size: 1.1rem;
-    line-height: 1.6;
+#cronometro {
+    font-family: var(--font-main); /* Fuente 'Roboto' */
+    font-size: 1.6em;
+    font-weight: 500;
+    color: var(--text-color); /* Color de texto normal */
+    line-height: 1.5;
+    padding: 15px 20px; /* Damos padding horizontal */
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    margin: 25px 0;
+    background-color: var(--surface-color); /* Fondo blanco */
+    border-radius: 8px;
+    width: 100%; /* Hacemos que ocupe todo el ancho de 'main' */
 }
 
-/* ---- 5. El Contador (Estilo Pastel) ---- */
-#contador-relacion {
-    font-size: 2.2rem; /* Más chico para el cel */
-    font-weight: bold;
-    color: var(--accent-color);
-    text-align: left;
-    margin-top: 1rem;
+.message-bottom {
+    font-family: var(--font-main);
+    font-size: 0.9em; /* Un poco más chico */
+    color: #777; /* Un gris más suave */
+    margin-top: 25px;
+    line-height: 1.5;
 }
 
 /* ---- 6. Footer ---- */
@@ -102,28 +126,20 @@ footer {
 @media (min-width: 768px) {
     
     header nav ul {
-        justify-content: flex-start; /* Los alineamos a la izquierda en compu */
+        justify-content: flex-start; 
     }
 
     header nav a {
-        font-size: 1.1rem; /* Letra más grande en compu */
+        font-size: 1.1rem; 
     }
 
     main {
-        /* Centramos el contenido en la compu */
         max-width: 800px; 
         margin: 2rem auto; 
     }
 
-    main h1 {
-        font-size: 3rem; /* Títulos más grandes en compu */
-    }
-
-    main h2 {
-        font-size: 1.5rem;
-    }
-
-    #contador-relacion {
-        font-size: 2.5rem;
-    }
+    /* Aumentamos tamaños en Desktop */
+    .message-top { font-size: 2.5em; }
+    #cronometro { font-size: 2em; }
+    .message-bottom { font-size: 1em; }
 }

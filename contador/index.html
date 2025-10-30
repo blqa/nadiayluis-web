@@ -1,1 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Felicidad Contigo ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* ¡CAMBIO IMPORTANTE! Fondo transparente para Google Sites */
+            background-color: transparent; 
+            margin: 0;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px 90px; /* Aumentamos el padding horizontal */
+            border-radius: 20px;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            max-width: 90%;
+            width: 700px; /* Aumentamos el ancho fijo para hacerlo más alargado */
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+            animation: fadeInScale 1s ease-out forwards;
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: translateY(-30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
 
+        .heart-icon {
+            font-size: 3em;
+            color: #e57373;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite alternate;
+        }
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+
+        .message-top {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2em;
+            color: #1a237e;
+            margin-bottom: 25px;
+            line-height: 1.3;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        .message-bottom {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.1em;
+            color: #555;
+            margin-top: 25px;
+            line-height: 1.5;
+        }
+
+        #cronometro {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.6em;
+            font-weight: 500;
+            color: #333;
+            line-height: 1.5;
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            margin: 25px 0;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        /* Estilos para el fondo animado (burbujas/corazones) */
+        .background-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .background-element {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatAndFade 15s infinite ease-in forwards;
+        }
+        .background-element:nth-child(2n) {
+            background-color: rgba(255, 255, 255, 0.2);
+            animation-delay: 2s;
+        }
+        .background-element:nth-child(3n) {
+            background-color: rgba(255, 255, 255, 0.4);
+            animation-delay: 4s;
+        }
+
+        @keyframes floatAndFade {
+            0% { transform: translateY(100vh) scale(0.2); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0; }
+            100% { transform: translateY(-50vh) scale(1.2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="background-element" style="left: 10%; width: 50px; height: 50px;"></div>
+        <div class="background-element" style="left: 25%; width: 30px; height: 30px; animation-delay: 3s;"></div>
+        <div class="background-element" style="left: 40%; width: 70px; height: 70px; animation-delay: 6s;"></div>
+        <div class="background-element" style="left: 55%; width: 40px; height: 40px; animation-delay: 9s;"></div>
+        <div class="background-element" style="left: 70%; width: 60px; height: 60px; animation-delay: 12s;"></div>
+        <div class="background-element" style="left: 85%; width: 25px; height: 25px; animation-delay: 15s;"></div>
+    </div>
+
+    <div class="container">
+        <div class="heart-icon">♡</div>
+        <div class="message-top">
+            ¡Han pasado
+        </div>
+        <div id="cronometro">Cargando...</div>
+        <div class="message-top">
+            desde que soy la persona más feliz de este mundo!
+        </div>
+        <div class="message-bottom">
+            (Desde el 11 de Junio de 2025, 23:23 PM)
+        </div>
+    </div>
+
+    <script>
+        // Establece la fecha y hora de inicio del cronómetro
+        // Formato: Año, Mes (0-11), Día, Hora, Minuto, Segundo
+        const fechaInicio = new Date(2025, 5, 11, 23, 23, 0); // Mes 5 es junio
+
+        // Función auxiliar para pluralizar
+        const pluralizar = (cantidad, unidad) => {
+            return cantidad === 1 ? `${cantidad} ${unidad}` : `${cantidad} ${unidad}s`;
+        };
+
+        function actualizarCronometro() {
+            const ahora = new Date();
+            let diferenciaMs = ahora - fechaInicio; // Diferencia en milisegundos
+
+            // Manejo de fechas futuras
+            if (diferenciaMs < 0) {
+                const segundosRestantes = Math.floor(Math.abs(diferenciaMs) / 1000);
+                const minutosRestantes = Math.floor(segundosRestantes / 60);
+                const horasRestantes = Math.floor(minutosRestantes / 60);
+                const diasRestantes = Math.floor(horasRestantes / 24);
+
+                let tiempoFaltante = [];
+                if (diasRestantes > 0) tiempoFaltante.push(pluralizar(diasRestantes, 'día'));
+                if (horasRestantes % 24 > 0) tiempoFaltante.push(pluralizar(horasRestantes % 24, 'hora'));
+                if (minutosRestantes % 60 > 0) tiempoFaltante.push(pluralizar(minutosRestantes % 60, 'minuto'));
+                // Siempre mostrar segundos si queda menos de un minuto o si es lo único que queda
+                if (segundosRestantes % 60 > 0 || (diasRestantes === 0 && horasRestantes === 0 && minutosRestantes === 0 && segundosRestantes > 0)) {
+                    tiempoFaltante.push(pluralizar(segundosRestantes % 60, 'segundo'));
+                }
+
+                let textoFuturo = "El momento de la felicidad está por llegar...";
+                if (tiempoFaltante.length > 0) {
+                    const ultimo = tiempoFaltante.pop();
+                    textoFuturo = `Faltan ${tiempoFaltante.join(', ')}${tiempoFaltante.length > 0 ? ' y ' : ''}${ultimo} para que la magia comience.`;
+                } else { // Si no hay tiempo restante (está en el futuro pero faltan menos de 1 segundo)
+                    textoFuturo = "¡El momento ha llegado!";
+                }
+
+                document.getElementById('cronometro').textContent = textoFuturo;
+                return;
+            }
+
+            // Calcular años, meses, días, horas, minutos y segundos
+            let anios = 0;
+            let meses = 0;
+            let dias = 0;
+            let horas = 0;
+            let minutos = 0;
+            let segundos = 0;
+
+            let tempFecha = new Date(fechaInicio.getTime()); // Copia para manipular
+
+            // Calcular años y meses
+            while (true) {
+                let proximoAnioFecha = new Date(tempFecha.getFullYear() + 1, tempFecha.getMonth(), tempFecha.getDate(), tempFecha.getHours(), tempFecha.getMinutes(), tempFecha.getSeconds());
+                if (proximoAnioFecha <= ahora) {
+                    anios++;
+                    tempFecha = proximoAnioFecha;
+                } else {
+                    break;
+                }
+            }
+
+            while (true) {
+                let proximoMesFecha = new Date(tempFecha.getFullYear(), tempFecha.getMonth() + 1, tempFecha.getDate(), tempFecha.getHours(), tempFecha.getMinutes(), tempFecha.getSeconds());
+                if (proximoMesFecha <= ahora) {
+                    meses++;
+                    tempFecha = proximoMesFecha;
+                } else {
+                    break;
+                }
+            }
+            
+            // Recalcular la diferencia en milisegundos después de restar años y meses
+            diferenciaMs = ahora - tempFecha;
+
+            // Calcular días, horas, minutos y segundos de la diferencia restante
+            segundos = Math.floor(diferenciaMs / 1000);
+            minutos = Math.floor(segundos / 60);
+            horas = Math.floor(minutos / 60);
+            dias = Math.floor(horas / 24);
+
+            segundos %= 60;
+            minutos %= 60;
+            horas %= 24;
+
+            // Construir la cadena de resultado condicionalmente
+            let resultado = [];
+
+            if (anios > 0) {
+                resultado.push(pluralizar(anios, 'año'));
+            }
+            if (meses > 0) {
+                resultado.push(pluralizar(meses, 'mes'));
+            }
+            if (dias > 0) {
+                resultado.push(pluralizar(dias, 'día'));
+            }
+            if (horas > 0) {
+                resultado.push(pluralizar(horas, 'hora'));
+            }
+            if (minutos > 0) {
+                resultado.push(pluralizar(minutos, 'minuto'));
+            }
+            // Los segundos siempre se muestran, a menos que todo lo demás sea 0 y los segundos también
+            if (segundos > 0 || resultado.length === 0) {
+                resultado.push(pluralizar(segundos, 'segundo'));
+            }
+            
+            // Unir los elementos con comas, y la última con "y"
+            let textoFinal = "";
+            if (resultado.length > 1) {
+                const ultimo = resultado.pop();
+                textoFinal = resultado.join(', ') + ' y ' + ultimo;
+            } else {
+                textoFinal = resultado[0] || "0 segundos"; // En caso de que todo sea cero al inicio
+            }
+
+            document.getElementById('cronometro').textContent = textoFinal;
+        }
+
+        // Actualiza el cronómetro cada segundo
+        setInterval(actualizarCronometro, 1000);
+
+        // Llama a la función una vez al cargar para mostrar el tiempo inmediatamente
+        actualizarCronometro();
+    </script>
+</body>
+</html>

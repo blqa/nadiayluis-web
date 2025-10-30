@@ -2,9 +2,17 @@
 // Formato: Año, Mes (0-11), Día, Hora, Minuto, Segundo
 const fechaInicio = new Date(2025, 5, 11, 23, 23, 0); // Mes 5 es junio
 
-// Función auxiliar para pluralizar
+// Función auxiliar para pluralizar (¡YA CORREGIDA!)
 const pluralizar = (cantidad, unidad) => {
-    return cantidad === 1 ? `${cantidad} ${unidad}` : `${cantidad} ${unidad}s`;
+    if (cantidad === 1) {
+        return `${cantidad} ${unidad}`;
+    }
+    // REGLA ESPECIAL PARA "MES"
+    if (unidad === 'mes') {
+        return `${cantidad} meses`;
+    }
+    // Regla general para todo lo demás
+    return `${cantidad} ${unidad}s`;
 };
 
 function actualizarCronometro() {
@@ -13,6 +21,7 @@ function actualizarCronometro() {
 
     // Manejo de fechas futuras (por si acaso)
     if (diferenciaMs < 0) {
+        // ... (El código de "faltan" se queda igual) ...
         const segundosRestantes = Math.floor(Math.abs(diferenciaMs) / 1000);
         const minutosRestantes = Math.floor(segundosRestantes / 60);
         const horasRestantes = Math.floor(minutosRestantes / 60);
@@ -89,7 +98,7 @@ function actualizarCronometro() {
         resultado.push(pluralizar(anios, 'año'));
     }
     if (meses > 0) {
-        resultado.push(pluralizar(meses, 'mes'));
+        resultado.push(pluralizar(meses, 'mes')); // Aquí se llamará a la función corregida
     }
     if (dias > 0) {
         resultado.push(pluralizar(dias, 'día'));

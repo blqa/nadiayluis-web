@@ -21,7 +21,6 @@ function actualizarCronometro() {
 
     // Manejo de fechas futuras (por si acaso)
     if (diferenciaMs < 0) {
-        // ... (El código de "faltan" se queda igual) ...
         const segundosRestantes = Math.floor(Math.abs(diferenciaMs) / 1000);
         const minutosRestantes = Math.floor(segundosRestantes / 60);
         const horasRestantes = Math.floor(minutosRestantes / 60);

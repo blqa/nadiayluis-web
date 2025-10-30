@@ -1,9 +1,9 @@
 /* ---- 1. Variables y Reseteo Básico (MODO PASTEL) ---- */
 :root {
-    --bg-color: #fdfaf6;       /* Un blanco cremoso / hueso */
-    --surface-color: #ffffff;  /* Blanco puro (para tarjetas/header) */
-    --text-color: #4a4a4a;       /* Gris oscuro (en lugar de negro puro) */
-    --accent-color: #e8b4b8;     /* Un rosa pastel / durazno */
+    --bg-color: #fdfaf6;
+    --surface-color: #ffffff;
+    --text-color: #4a4a4a;
+    --accent-color: #e8b4b8;
     --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -18,60 +18,57 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--font-main);
-    
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* ---- 3. Header y Navegación ---- */
+/* ---- 3. Header y Navegación (MOBILE-FIRST) ---- */
 header {
     background-color: var(--surface-color);
-    padding: 1rem 2rem;
-    /* Una sombra mucho más suave */
+    padding: 1rem 1.5rem; /* Un poco más de padding lateral para el cel */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 header nav ul {
     list-style: none;
-    display: flex;
-    gap: 1.5rem;
+    display: flex; /* En mobile, los dejamos en horizontal */
+    justify-content: center; /* Centramos los 3 links */
+    gap: 1.5rem; /* Espacio entre links */
 }
 
 header nav a {
     color: var(--text-color);
     text-decoration: none;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1rem; /* Un tamaño cómodo para tap */
     transition: color 0.2s ease;
 }
 
 header nav a:hover {
-    color: var(--accent-color); /* El acento pastel */
+    color: var(--accent-color);
 }
 
-/* ---- 4. Contenido Principal (Main) ---- */
+/* ---- 4. Contenido Principal (Main - MOBILE-FIRST) ---- */
 main {
     flex-grow: 1; 
-
-    /* Centra el contenido */
     width: 100%;
-    max-width: 800px; 
-    margin: 2rem auto; 
-    padding: 0 1rem; 
+    /* Padding para que el texto no se pegue a los bordes del teléfono */
+    padding: 2rem 1.5rem; 
 }
 
 main h1 {
-    font-size: 3rem;
-    color: var(--text-color); /* El título principal ahora es oscuro */
+    font-size: 2.5rem; /* Más chico para el cel */
+    color: var(--text-color);
     margin-bottom: 1rem;
+    line-height: 1.1; /* Evita que se separe mucho en 2 renglones */
 }
 
 main h2 {
-    font-size: 1.5rem;
-    color: var(--accent-color); /* El acento pastel en los subtítulos */
+    font-size: 1.3rem; /* Más chico para el cel */
+    color: var(--accent-color);
     margin-top: 2rem;
-    border-bottom: 2px solid #f0f0f0; /* Una línea divisoria suave */
+    border-bottom: 2px solid #f0f0f0;
     padding-bottom: 0.5rem;
 }
 
@@ -82,12 +79,11 @@ main p {
 
 /* ---- 5. El Contador (Estilo Pastel) ---- */
 #contador-relacion {
-    font-size: 2.5rem;
+    font-size: 2.2rem; /* Más chico para el cel */
     font-weight: bold;
-    color: var(--accent-color); /* Color pastel */
+    color: var(--accent-color);
     text-align: left;
     margin-top: 1rem;
-    /* Quitamos el efecto neón, ya no aplica */
 }
 
 /* ---- 6. Footer ---- */
@@ -96,5 +92,38 @@ footer {
     text-align: center;
     padding: 1.5rem;
     margin-top: 2rem; 
-    border-top: 1px solid #f0f0f0; /* Línea suave para separar */
+    border-top: 1px solid #f0f0f0;
+}
+
+
+/* ---- 7. MEDIA QUERIES (El lujo para Desktop) ---- */
+/* Esto solo aplica si la pantalla es MÁS GRANDE que 768px */
+
+@media (min-width: 768px) {
+    
+    header nav ul {
+        justify-content: flex-start; /* Los alineamos a la izquierda en compu */
+    }
+
+    header nav a {
+        font-size: 1.1rem; /* Letra más grande en compu */
+    }
+
+    main {
+        /* Centramos el contenido en la compu */
+        max-width: 800px; 
+        margin: 2rem auto; 
+    }
+
+    main h1 {
+        font-size: 3rem; /* Títulos más grandes en compu */
+    }
+
+    main h2 {
+        font-size: 1.5rem;
+    }
+
+    #contador-relacion {
+        font-size: 2.5rem;
+    }
 }
